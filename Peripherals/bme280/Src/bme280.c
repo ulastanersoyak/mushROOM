@@ -220,6 +220,7 @@ bme280_compensate_temperature (const bme280_t *dev, int32_t adc_T,
 static uint32_t
 bme280_compensate_pressure (const bme280_t *dev, int32_t adc_P, int32_t t_fine)
 {
+
   int64_t var1 = ((int64_t)t_fine) - 128000;
   int64_t var2 = var1 * var1 * (int64_t)dev->calib.dig_P6;
   var2 = var2 + ((var1 * (int64_t)dev->calib.dig_P5) << 17);
@@ -300,7 +301,7 @@ bme280_init (bme280_t *dev,
 }
 
 bme280_result_t
-bme280_read_data (const bme280_t *dev, bme280_data_t *data)
+bme280_read_data (bme280_t *dev, bme280_data_t *data)
 {
   if (dev == NULL || data == NULL)
     {
@@ -333,7 +334,7 @@ bme280_read_data (const bme280_t *dev, bme280_data_t *data)
 }
 
 bme280_result_t
-bme280_read_temperature (const bme280_t *dev, float *temperature)
+bme280_read_temperature (bme280_t *dev, float *temperature)
 {
   if (dev == NULL || temperature == NULL)
     {
@@ -358,7 +359,7 @@ bme280_read_temperature (const bme280_t *dev, float *temperature)
 }
 
 bme280_result_t
-bme280_read_humidity (const bme280_t *dev, float *humidity)
+bme280_read_humidity (bme280_t *dev, float *humidity)
 {
   if (dev == NULL || humidity == NULL)
     {
